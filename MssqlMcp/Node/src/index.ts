@@ -98,15 +98,21 @@ export async function createSqlConfig(): Promise<{ config: sql.config, token: st
     case 'windows-integrated': {
       // Windows Integrated Authentication - uses current Windows session credentials
       // No username/password required - authenticates as the logged-in Windows user
+      // Requires msnodesqlv8 driver and SQL Server Native Client/ODBC Driver installed
+      const encrypt = process.env.ENCRYPT?.toLowerCase() === 'true';
+      const connectionString = `Driver={ODBC Driver 17 for SQL Server};Server=${process.env.SERVER_NAME};Database=${process.env.DATABASE_NAME};Trusted_Connection=Yes;Encrypt=${encrypt ? 'yes' : 'no'};TrustServerCertificate=${trustServerCertificate ? 'yes' : 'no'};Connection Timeout=${connectionTimeout};`;
+
       return {
         config: {
           ...baseConfig,
+          driver: 'msnodesqlv8',
+          connectionString: connectionString,
           options: {
             ...baseConfig.options,
-            encrypt: process.env.ENCRYPT?.toLowerCase() === 'true',
+            encrypt: encrypt,
             trustedConnection: true,
           },
-        },
+        } as sql.config,
         token: null,
         expiresOn: null
       };
