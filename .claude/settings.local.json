@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git remote set-url:*)",
+      "Bash(gh issue list:*)",
+      "Bash(git checkout:*)",
+      "Bash(npm install:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nUse msnodesqlv8 driver for Windows Integrated Authentication\n\n- Add msnodesqlv8 package for native Windows auth support\n- Configure ODBC connection string with Trusted_Connection\n- Enables true Windows session credential authentication\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}
