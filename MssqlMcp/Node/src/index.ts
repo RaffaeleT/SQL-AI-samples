@@ -73,7 +73,7 @@ export async function createSqlConfig(): Promise<{ config: sql.config, token: st
     }
 
     case 'windows': {
-      // Windows Integrated Authentication (NTLM)
+      // Windows Authentication (NTLM) with explicit credentials
       return {
         config: {
           ...baseConfig,
@@ -88,6 +88,23 @@ export async function createSqlConfig(): Promise<{ config: sql.config, token: st
               userName: process.env.USERNAME || '',
               password: process.env.PASSWORD || '',
             },
+          },
+        },
+        token: null,
+        expiresOn: null
+      };
+    }
+
+    case 'windows-integrated': {
+      // Windows Integrated Authentication - uses current Windows session credentials
+      // No username/password required - authenticates as the logged-in Windows user
+      return {
+        config: {
+          ...baseConfig,
+          options: {
+            ...baseConfig.options,
+            encrypt: process.env.ENCRYPT?.toLowerCase() === 'true',
+            trustedConnection: true,
           },
         },
         token: null,

@@ -11,8 +11,20 @@
         "READONLY": "false"
       }
     },
-    "mssql-windows-auth": {
-      "_comment": "Windows Integrated Authentication (NTLM) - for on-prem with domain auth",
+    "mssql-windows-integrated": {
+      "_comment": "Windows Integrated Authentication - uses current Windows session (no password needed)",
+      "command": "node",
+      "args": ["C:/path/to/SQL-AI-samples/MssqlMcp/Node/dist/index.js"],
+      "env": {
+        "SERVER_NAME": "your-server-instance",
+        "DATABASE_NAME": "your-database-name",
+        "AUTH_METHOD": "windows-integrated",
+        "TRUST_SERVER_CERTIFICATE": "true",
+        "READONLY": "false"
+      }
+    },
+    "mssql-windows-ntlm": {
+      "_comment": "Windows Authentication (NTLM) with explicit credentials",
       "command": "node",
       "args": ["C:/path/to/SQL-AI-samples/MssqlMcp/Node/dist/index.js"],
       "env": {
@@ -27,7 +39,7 @@
       }
     },
     "mssql-sql-auth": {
-      "_comment": "SQL Server Authentication - for on-prem or Azure SQL with SQL credentials",
+      "_comment": "SQL Server Authentication - username/password",
       "command": "node",
       "args": ["C:/path/to/SQL-AI-samples/MssqlMcp/Node/dist/index.js"],
       "env": {
