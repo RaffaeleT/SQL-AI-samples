@@ -1,13 +1,44 @@
 {
-    "mcpServers": {
-      "mssql": {
-        "command": "node",
-        "args": [ "Q:/Repos/SQL-AI-samples/MssqlMcp/Node/dist/index.js" ],
-        "env": {
-          "SERVER_NAME": "your-server-name.database.windows.net",
-          "DATABASE_NAME": "your-database-name",
-          "READONLY": "false"
-        }
+  "mcpServers": {
+    "mssql-azure-ad": {
+      "_comment": "Azure AD Authentication (default) - for Azure SQL Database",
+      "command": "node",
+      "args": ["C:/path/to/SQL-AI-samples/MssqlMcp/Node/dist/index.js"],
+      "env": {
+        "SERVER_NAME": "your-server-name.database.windows.net",
+        "DATABASE_NAME": "your-database-name",
+        "AUTH_METHOD": "azure-ad",
+        "READONLY": "false"
+      }
+    },
+    "mssql-windows-auth": {
+      "_comment": "Windows Integrated Authentication (NTLM) - for on-prem with domain auth",
+      "command": "node",
+      "args": ["C:/path/to/SQL-AI-samples/MssqlMcp/Node/dist/index.js"],
+      "env": {
+        "SERVER_NAME": "your-server-instance",
+        "DATABASE_NAME": "your-database-name",
+        "AUTH_METHOD": "windows",
+        "DOMAIN": "your-domain",
+        "USERNAME": "your-windows-username",
+        "PASSWORD": "your-windows-password",
+        "TRUST_SERVER_CERTIFICATE": "true",
+        "READONLY": "false"
+      }
+    },
+    "mssql-sql-auth": {
+      "_comment": "SQL Server Authentication - for on-prem or Azure SQL with SQL credentials",
+      "command": "node",
+      "args": ["C:/path/to/SQL-AI-samples/MssqlMcp/Node/dist/index.js"],
+      "env": {
+        "SERVER_NAME": "your-server-instance",
+        "DATABASE_NAME": "your-database-name",
+        "AUTH_METHOD": "sql",
+        "SQL_USERNAME": "your-sql-username",
+        "SQL_PASSWORD": "your-sql-password",
+        "TRUST_SERVER_CERTIFICATE": "true",
+        "READONLY": "false"
       }
     }
   }
+}
