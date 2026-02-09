@@ -33,24 +33,159 @@ This server leverages the Model Context Protocol (MCP), a versatile framework th
 ### Prerequisites
 - Node.js 14 or higher
 - Claude Desktop or VS Code with Agent extension
+- (Optional) For Windows service installation: Administrator privileges
 
 ### Set up project
 
-1. **Install Dependencies**  
-   Run the following command in the root folder to install all necessary dependencies:  
+1. **Install Dependencies**
+   Run the following command in the root folder to install all necessary dependencies:
    ```bash
    npm install
    ```
 
-2. **Build the Project**  
-   Compile the project by running:  
+2. **Build the Project**
+   Compile the project by running:
    ```bash
    npm run build
    ```
 
 ## Configuration Setup
 
-### Option 1: VS Code Agent Setup
+This server can be configured in two ways:
+1. **Local mode** - For personal use with Claude Desktop or VS Code Agent (stdio)
+2. **Network mode** - For sharing across your network via HTTP SSE
+
+### Network Deployment (HTTP SSE Server)
+
+The HTTP SSE server allows you to share the MCP server across your network, enabling multiple clients to connect remotely.
+
+#### Quick Setup (Windows)
+
+1. **Configure Environment Variables**
+   - Copy `.env.example` to `.env`
+   - Edit `.env` with your database settings:
+
+   ```env
+   SERVER_NAME=your-server.database.windows.net
+   DATABASE_NAME=your-database
+   AUTH_METHOD=windows-integrated
+   READONLY=false
+   HTTP_PORT=3000
+   HTTP_HOST=0.0.0.0
+   ```
+
+2. **Install the Server**
+   Run the installation script:
+   ```batch
+   install-windows.bat
+   ```
+
+3. **Start the HTTP Server**
+   ```batch
+   start-http-server.bat
+   ```
+
+   Or use npm:
+   ```bash
+   npm run start:http
+   ```
+
+4. **Verify Installation**
+   Open a browser and navigate to:
+   ```
+   http://localhost:3000/health
+   ```
+
+   You should see a JSON response with server status.
+
+#### Install as Windows Service (Optional)
+
+To run the server as a Windows service that starts automatically on boot:
+
+1. **Install Service** (Run as Administrator)
+   ```batch
+   install-windows-service.bat
+   ```
+
+2. **Manage Service**
+   - Open Services (services.msc)
+   - Find "MSSQL MCP HTTP Server"
+   - Right-click to Start/Stop/Restart
+
+3. **Uninstall Service** (Run as Administrator)
+   ```batch
+   uninstall-windows-service.bat
+   ```
+
+#### Authentication Methods
+
+The server supports multiple authentication methods for SQL Server:
+
+- **windows-integrated**: Uses current Windows session credentials (no username/password needed)
+- **sql**: SQL Server authentication (username/password)
+- **windows**: Windows authentication with explicit credentials
+- **azure-ad**: Azure Active Directory authentication
+
+Set `AUTH_METHOD` in your `.env` file to choose the authentication method.
+
+#### HTTP Endpoints
+
+- `GET /health` - Health check endpoint
+- `GET /sse` - Server-Sent Events endpoint for MCP connections
+- `POST /message` - Message endpoint for client communication
+
+#### Connecting Clients to HTTP Server
+
+Once the HTTP server is running, clients can connect using the SSE endpoint:
+
+**Claude Desktop Configuration:**
+```json
+{
+  "mcpServers": {
+    "mssql-remote": {
+      "transport": "sse",
+      "url": "http://your-server-ip:3000/sse"
+    }
+  }
+}
+```
+
+**VS Code Agent Configuration:**
+```json
+{
+  "mcp": {
+    "servers": {
+      "mssql-remote": {
+        "type": "sse",
+        "url": "http://your-server-ip:3000/sse"
+      }
+    }
+  }
+}
+```
+
+#### Security Considerations (TODO)
+
+⚠️ **This initial implementation is for internal corporate networks only.**
+
+**Current Status:**
+- No authentication implemented
+- No HTTPS/SSL encryption
+- No audit logging
+- No access control
+
+**Planned Security Enhancements:**
+- [ ] Token-based authentication
+- [ ] Active Directory integration
+- [ ] HTTPS with SSL certificates
+- [ ] Audit logging for all queries and access
+- [ ] Firewall rules and IP whitelisting
+- [ ] Rate limiting
+- [ ] Request validation and sanitization
+
+### Local Mode Configuration
+
+#### Option 1: VS Code Agent Setup
 
 1. **Install VS Code Agent Extension**
    - Open VS Code
@@ -110,7 +245,7 @@ This server leverages the Model Context Protocol (MCP), a versatile framework th
    - Run "MCP: List Servers" to verify your server is configured
    - You should see "mssql" in the list of available servers
 
-### Option 2: Claude Desktop Setup
+#### Option 2: Claude Desktop Setup
 
 1. **Open Claude Desktop Settings**
    - Navigate to File → Settings → Developer → Edit Config
