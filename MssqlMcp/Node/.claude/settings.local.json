@@ -12,7 +12,8 @@
       "Bash(set:*)",
       "Bash(set READONLY=false)",
       "Bash(echo:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(git checkout:*)"
     ]
   }
 }

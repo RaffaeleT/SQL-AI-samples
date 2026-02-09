@@ -8,7 +8,12 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
+  ListPromptsRequestSchema,
+  GetPromptRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
+import { readdir, readFile } from "fs/promises";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
 // For windows-integrated auth, we need the msnodesqlv8 variant of the mssql module.
 // The standard 'mssql' import uses the tedious driver and ignores the 'driver' config property.
@@ -172,6 +177,75 @@ const listTableTool = new ListTableTool();
 const dropTableTool = new DropTableTool();
 const describeTableTool = new DescribeTableTool();
 
+// Get the directory path for the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Prompt discovery utilities
+interface PromptInfo {
+  name: string;
+  description: string;
+  filePath: string;
+}
+
+async function discoverPrompts(): Promise<PromptInfo[]> {
+  try {
+    const promptsDir = join(__dirname, "..", "prompts");
+    const files = await readdir(promptsDir);
+
+    const prompts: PromptInfo[] = [];
+
+    for (const file of files) {
+      // Match files like: prompt-database-schema.md
+      const match = file.match(/^prompt-(.+)\.md$/);
+      if (match) {
+        const name = match[1];
+        const filePath = join(promptsDir, file);
+
+        try {
+          // Read the file to extract description
+          const content = await readFile(filePath, "utf-8");
+          const description = extractDescription(content);
+
+          prompts.push({
+            name,
+            description,
+            filePath,
+          });
+        } catch (error) {
+          console.error(`Error reading prompt file ${file}:`, error);
+        }
+      }
+    }
+
+    return prompts;
+  } catch (error) {
+    console.error("Error discovering prompts:", error);
+    return [];
+  }
+}
+
+function extractDescription(content: string): string {
+  // Look for a line starting with "Description:" or a "## Description" header
+  const descriptionMatch = content.match(/^Description:\s*(.+)$/m) ||
+                          content.match(/^##?\s*Description\s*\n+(.+)$/m);
+
+  if (descriptionMatch && descriptionMatch[1]) {
+    return descriptionMatch[1].trim();
+  }
+
+  // Fallback: use first non-empty line (after headers)
+  const lines = content.split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed && !trimmed.startsWith('#')) {
+      return trimmed;
+    }
+  }
+
+  return "No description provided";
+}
+
 const server = new Server(
   {
     name: "mssql-mcp-server",
@@ -180,6 +254,7 @@ const server = new Server(
   {
     capabilities: {
       tools: {},
+      prompts: {},
     },
   },
 );
@@ -244,6 +319,47 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       content: [{ type: "text", text: `Error occurred: ${error}` }],
       isError: true,
     };
+  }
+});
+
+// Prompt handlers
+server.setRequestHandler(ListPromptsRequestSchema, async () => {
+  const prompts = await discoverPrompts();
+
+  return {
+    prompts: prompts.map(p => ({
+      name: p.name,
+      description: p.description,
+    })),
+  };
+});
+
+server.setRequestHandler(GetPromptRequestSchema, async (request) => {
+  const { name } = request.params;
+
+  const prompts = await discoverPrompts();
+  const prompt = prompts.find(p => p.name === name);
+
+  if (!prompt) {
+    throw new Error(`Unknown prompt: ${name}`);
+  }
+
+  try {
+    const content = await readFile(prompt.filePath, "utf-8");
+
+    return {
+      messages: [
+        {
+          role: "user",
+          content: {
+            type: "text",
+            text: content,
+          },
+        },
+      ],
+    };
+  } catch (error) {
+    throw new Error(`Error reading prompt file: ${error}`);
   }
 });
 
