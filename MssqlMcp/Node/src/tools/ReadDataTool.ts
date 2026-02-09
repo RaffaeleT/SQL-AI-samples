@@ -177,7 +177,7 @@ export class ReadDataTool implements Tool {
     // Limit the number of returned records to prevent memory issues
     const maxRecords = 10000;
     if (data.length > maxRecords) {
-      console.warn(`Query returned ${data.length} records, limiting to ${maxRecords}`);
+      console.error(`Query returned ${data.length} records, limiting to ${maxRecords}`);
       return data.slice(0, maxRecords);
     }
 
@@ -188,7 +188,7 @@ export class ReadDataTool implements Tool {
           // Sanitize column names (remove any suspicious characters)
           const sanitizedKey = key.replace(/[^\w\s-_.]/g, '');
           if (sanitizedKey !== key) {
-            console.warn(`Column name sanitized: ${key} -> ${sanitizedKey}`);
+            console.error(`Column name sanitized: ${key} -> ${sanitizedKey}`);
           }
           sanitized[sanitizedKey] = value;
         }
@@ -210,7 +210,7 @@ export class ReadDataTool implements Tool {
       // Validate the query for security issues
       const validation = this.validateQuery(query);
       if (!validation.isValid) {
-        console.warn(`Security validation failed for query: ${query.substring(0, 100)}...`);
+        console.error(`Security validation failed for query: ${query.substring(0, 100)}...`);
         return {
           success: false,
           message: `Security validation failed: ${validation.error}`,
@@ -219,7 +219,7 @@ export class ReadDataTool implements Tool {
       }
 
       // Log the query for audit purposes (in production, consider more secure logging)
-      console.log(`Executing validated SELECT query: ${query.substring(0, 200)}${query.length > 200 ? '...' : ''}`);
+      console.error(`Executing validated SELECT query: ${query.substring(0, 200)}${query.length > 200 ? '...' : ''}`);
 
       // Execute the query using the global connection pool
       const pool = getSqlPool();
