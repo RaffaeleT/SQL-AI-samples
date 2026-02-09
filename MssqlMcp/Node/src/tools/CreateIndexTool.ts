@@ -1,5 +1,5 @@
-import sql from "mssql";
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
+import { getSqlPool } from "../index.js";
 
 export class CreateIndexTool implements Tool {
   [key: string]: any;
@@ -40,7 +40,8 @@ export class CreateIndexTool implements Tool {
       }
       const columnNames = columns.join(", ");
 
-      const request = new sql.Request();
+      const pool = getSqlPool();
+      const request = pool.request();
       const query = `CREATE ${indexType} INDEX ${indexName} ON ${schemaName}.${tableName} (${columnNames})`;
       await request.query(query);
       

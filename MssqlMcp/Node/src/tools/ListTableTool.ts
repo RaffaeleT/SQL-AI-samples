@@ -1,5 +1,5 @@
-import sql from "mssql";
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
+import { getSqlPool } from "../index.js";
 
 export class ListTableTool implements Tool {
   [key: string]: any;
@@ -23,7 +23,8 @@ export class ListTableTool implements Tool {
   async run(params: any) {
     try {
       const { parameters } = params;
-      const request = new sql.Request();
+      const pool = getSqlPool();
+      const request = pool.request();
       const schemaFilter = parameters && parameters.length > 0 ? `AND TABLE_SCHEMA IN (${parameters.map((p: string) => `'${p}'`).join(", ")})` : "";
       const query = `SELECT TABLE_SCHEMA + '.' + TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' ${schemaFilter} ORDER BY TABLE_SCHEMA, TABLE_NAME`;
       const result = await request.query(query);

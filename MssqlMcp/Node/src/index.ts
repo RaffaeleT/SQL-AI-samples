@@ -10,6 +10,21 @@ import {
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 
+// For windows-integrated auth, we need the msnodesqlv8 variant of the mssql module.
+// The standard 'mssql' import uses the tedious driver and ignores the 'driver' config property.
+// We dynamically import 'mssql/msnodesqlv8' at connection time to use the native ODBC driver.
+let sqlConnect: typeof sql | null = null;
+async function getSqlModule(): Promise<typeof sql> {
+  if (sqlConnect) return sqlConnect;
+  if (authMethod === 'windows-integrated') {
+    const mod = await import("mssql/msnodesqlv8.js");
+    sqlConnect = mod.default;
+  } else {
+    sqlConnect = sql;
+  }
+  return sqlConnect;
+}
+
 // Internal imports
 import { UpdateDataTool } from "./tools/UpdateDataTool.js";
 import { InsertDataTool } from "./tools/InsertDataTool.js";
@@ -28,6 +43,14 @@ import { DescribeTableTool } from "./tools/DescribeTableTool.js";
 let globalSqlPool: sql.ConnectionPool | null = null;
 let globalAccessToken: string | null = null;
 let globalTokenExpiresOn: Date | null = null;
+
+// Export function to get the global SQL pool
+export function getSqlPool(): sql.ConnectionPool {
+  if (!globalSqlPool || !globalSqlPool.connected) {
+    throw new Error('SQL connection pool is not initialized or not connected');
+  }
+  return globalSqlPool;
+}
 
 // Get the authentication method from environment variable
 const authMethod = process.env.AUTH_METHOD?.toLowerCase() || 'azure-ad';
@@ -104,15 +127,8 @@ export async function createSqlConfig(): Promise<{ config: sql.config, token: st
 
       return {
         config: {
-          ...baseConfig,
-          driver: 'msnodesqlv8',
           connectionString: connectionString,
-          options: {
-            ...baseConfig.options,
-            encrypt: encrypt,
-            trustedConnection: true,
-          },
-        } as sql.config,
+        } as unknown as sql.config,
         token: null,
         expiresOn: null
       };
@@ -278,7 +294,8 @@ async function ensureSqlConnection() {
     await globalSqlPool.close();
   }
 
-  globalSqlPool = await sql.connect(config);
+  const sqlMod = await getSqlModule();
+  globalSqlPool = await sqlMod.connect(config);
 }
 
 // Patch all tool handlers to ensure SQL connection before running

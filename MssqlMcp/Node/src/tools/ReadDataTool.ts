@@ -1,5 +1,5 @@
-import sql from "mssql";
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
+import { getSqlPool } from "../index.js";
 
 export class ReadDataTool implements Tool {
   [key: string]: any;
@@ -221,8 +221,9 @@ export class ReadDataTool implements Tool {
       // Log the query for audit purposes (in production, consider more secure logging)
       console.log(`Executing validated SELECT query: ${query.substring(0, 200)}${query.length > 200 ? '...' : ''}`);
 
-      // Execute the query
-      const request = new sql.Request();
+      // Execute the query using the global connection pool
+      const pool = getSqlPool();
+      const request = pool.request();
       const result = await request.query(query);
       
       // Sanitize the result

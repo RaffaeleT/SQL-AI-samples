@@ -1,5 +1,5 @@
-import sql from "mssql";
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
+import { getSqlPool } from "../index.js";
 
 export class UpdateDataTool implements Tool {
   [key: string]: any;
@@ -34,7 +34,8 @@ export class UpdateDataTool implements Tool {
         throw new Error("WHERE clause is required for security reasons");
       }
 
-      const request = new sql.Request();
+      const pool = getSqlPool();
+      const request = pool.request();
       
       // Build SET clause with parameterized queries for security
       const setClause = Object.keys(updates)
