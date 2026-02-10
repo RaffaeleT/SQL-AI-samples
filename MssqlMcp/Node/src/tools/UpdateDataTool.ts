@@ -1,5 +1,5 @@
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
-import { getSqlPool } from "../index.js";
+import { getSqlPool } from "../db.js";
 
 export class UpdateDataTool implements Tool {
   [key: string]: any;

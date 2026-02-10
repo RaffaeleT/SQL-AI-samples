@@ -44,18 +44,13 @@ import { DescribeTableTool } from "./tools/DescribeTableTool.js";
 // MSSQL Database connection configuration
 // const credential = new DefaultAzureCredential();
 
+// Re-export getSqlPool from shared db module
+export { getSqlPool } from "./db.js";
+import { setSqlPool, getRawSqlPool } from "./db.js";
+
 // Globals for connection and token reuse
-let globalSqlPool: sql.ConnectionPool | null = null;
 let globalAccessToken: string | null = null;
 let globalTokenExpiresOn: Date | null = null;
-
-// Export function to get the global SQL pool
-export function getSqlPool(): sql.ConnectionPool {
-  if (!globalSqlPool || !globalSqlPool.connected) {
-    throw new Error('SQL connection pool is not initialized or not connected');
-  }
-  return globalSqlPool;
-}
 
 // Get the authentication method from environment variable
 const authMethod = process.env.AUTH_METHOD?.toLowerCase() || 'azure-ad';
@@ -382,16 +377,17 @@ runServer().catch((error) => {
 // Connect to SQL only when handling a request
 
 async function ensureSqlConnection() {
+  const currentPool = getRawSqlPool();
   // For non-Azure AD auth, just check if we have a connected pool
   if (authMethod !== 'azure-ad') {
-    if (globalSqlPool && globalSqlPool.connected) {
+    if (currentPool && currentPool.connected) {
       return;
     }
   } else {
     // For Azure AD, also check token expiry
     if (
-      globalSqlPool &&
-      globalSqlPool.connected &&
+      currentPool &&
+      currentPool.connected &&
       globalAccessToken &&
       globalTokenExpiresOn &&
       globalTokenExpiresOn > new Date(Date.now() + 2 * 60 * 1000) // 2 min buffer
@@ -406,12 +402,12 @@ async function ensureSqlConnection() {
   globalTokenExpiresOn = expiresOn;
 
   // Close old pool if exists
-  if (globalSqlPool && globalSqlPool.connected) {
-    await globalSqlPool.close();
+  if (currentPool && currentPool.connected) {
+    await currentPool.close();
   }
 
   const sqlMod = await getSqlModule();
-  globalSqlPool = await sqlMod.connect(config);
+  setSqlPool(await sqlMod.connect(config));
 }
 
 // Patch all tool handlers to ensure SQL connection before running

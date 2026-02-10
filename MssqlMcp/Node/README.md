@@ -49,7 +49,7 @@ This server leverages the Model Context Protocol (MCP), a versatile framework th
    npm run build
    ```
 
-## Configuration Setup
+## Local vs. Network Modes Configuration
 
 This server can be configured in two ways:
 1. **Local mode** - For personal use with Claude Desktop or VS Code Agent (stdio)
@@ -143,8 +143,8 @@ Once the HTTP server is running, clients can connect using the SSE endpoint:
 {
   "mcpServers": {
     "mssql-remote": {
-      "transport": "sse",
-      "url": "http://your-server-ip:3000/sse"
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "http://localhost:3911/sse"]
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
-import { getSqlPool } from "../index.js";
+import { getSqlPool } from "../db.js";
 export class InsertDataTool implements Tool {
   [key: string]: any;
   name = "insert_data";

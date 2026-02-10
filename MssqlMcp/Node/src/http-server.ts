@@ -47,8 +47,9 @@ dotenv.config();
 const HTTP_PORT = parseInt(process.env.HTTP_PORT || "3000", 10);
 const HTTP_HOST = process.env.HTTP_HOST || "0.0.0.0";
 
+import { setSqlPool, getRawSqlPool } from "./db.js";
+
 // Globals for connection and token reuse
-let globalSqlPool: sql.ConnectionPool | null = null;
 let globalAccessToken: string | null = null;
 let globalTokenExpiresOn: Date | null = null;
 
@@ -64,14 +65,6 @@ async function getSqlModule(): Promise<typeof sql> {
     sqlConnect = sql;
   }
   return sqlConnect;
-}
-
-// Export function to get the global SQL pool
-export function getSqlPool(): sql.ConnectionPool {
-  if (!globalSqlPool || !globalSqlPool.connected) {
-    throw new Error('SQL connection pool is not initialized or not connected');
-  }
-  return globalSqlPool;
 }
 
 // Get the authentication method from environment variable
@@ -259,14 +252,15 @@ const isReadOnly = process.env.READONLY === "true";
 
 // Connect to SQL
 async function ensureSqlConnection() {
+  const currentPool = getRawSqlPool();
   if (authMethod !== 'azure-ad') {
-    if (globalSqlPool && globalSqlPool.connected) {
+    if (currentPool && currentPool.connected) {
       return;
     }
   } else {
     if (
-      globalSqlPool &&
-      globalSqlPool.connected &&
+      currentPool &&
+      currentPool.connected &&
       globalAccessToken &&
       globalTokenExpiresOn &&
       globalTokenExpiresOn > new Date(Date.now() + 2 * 60 * 1000)
@@ -279,12 +273,12 @@ async function ensureSqlConnection() {
   globalAccessToken = token;
   globalTokenExpiresOn = expiresOn;
 
-  if (globalSqlPool && globalSqlPool.connected) {
-    await globalSqlPool.close();
+  if (currentPool && currentPool.connected) {
+    await currentPool.close();
   }
 
   const sqlMod = await getSqlModule();
-  globalSqlPool = await sqlMod.connect(config);
+  setSqlPool(await sqlMod.connect(config));
 }
 
 // Patch all tool handlers to ensure SQL connection before running
@@ -433,13 +427,35 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
 
   // Health check endpoint
   if (url.pathname === "/health" && req.method === "GET") {
-    res.writeHead(200, { "Content-Type": "application/json" });
+    let dbStatus: { connected: boolean; latencyMs?: number; error?: string } = { connected: false };
+
+    try {
+      await ensureSqlConnection();
+      const pool = getRawSqlPool();
+      if (pool && pool.connected) {
+        const start = Date.now();
+        await pool.request().query("SELECT 1");
+        dbStatus = { connected: true, latencyMs: Date.now() - start };
+      } else {
+        dbStatus = { connected: false, error: "No active connection pool" };
+      }
+    } catch (err) {
+      dbStatus = { connected: false, error: String(err) };
+    }
+
+    const overall = dbStatus.connected ? "ok" : "degraded";
+    res.writeHead(dbStatus.connected ? 200 : 503, { "Content-Type": "application/json" });
     res.end(JSON.stringify({
-      status: "ok",
+      status: overall,
       server: "mssql-mcp-server",
       version: "0.1.0",
       readonly: isReadOnly,
-      authMethod: authMethod
+      authMethod: authMethod,
+      database: {
+        serverName: process.env.SERVER_NAME || null,
+        databaseName: process.env.DATABASE_NAME || null,
+        ...dbStatus,
+      },
     }));
     return;
   }
@@ -448,46 +464,47 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
   if (url.pathname === "/sse" && req.method === "GET") {
     console.error(`[${new Date().toISOString()}] New SSE connection from ${req.socket.remoteAddress}`);
 
-    const sessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     const mcpServer = createMCPServer();
-    const transport = new SSEServerTransport(url.pathname, res);
+    const transport = new SSEServerTransport("/sse", res);
 
-    activeConnections.set(sessionId, { server: mcpServer, transport });
+    activeConnections.set(transport.sessionId, { server: mcpServer, transport });
 
     // Handle disconnection
     req.on("close", () => {
-      console.error(`[${new Date().toISOString()}] SSE connection closed: ${sessionId}`);
-      activeConnections.delete(sessionId);
+      console.error(`[${new Date().toISOString()}] SSE connection closed: ${transport.sessionId}`);
+      activeConnections.delete(transport.sessionId);
     });
 
     try {
       await mcpServer.connect(transport);
-      console.error(`[${new Date().toISOString()}] MCP server connected for session: ${sessionId}`);
+      console.error(`[${new Date().toISOString()}] MCP server connected for session: ${transport.sessionId}`);
     } catch (error) {
       console.error(`[${new Date().toISOString()}] Error connecting MCP server:`, error);
-      activeConnections.delete(sessionId);
+      activeConnections.delete(transport.sessionId);
     }
     return;
   }
 
-  // Message endpoint for MCP (POST)
-  if (url.pathname === "/message" && req.method === "POST") {
-    let body = "";
-    req.on("data", chunk => {
-      body += chunk.toString();
-    });
+  // Message endpoint for MCP (POST routed to the correct SSE session)
+  if (url.pathname === "/sse" && req.method === "POST") {
+    const sessionId = url.searchParams.get("sessionId");
+    const connection = sessionId ? activeConnections.get(sessionId) : undefined;
 
-    req.on("end", async () => {
-      try {
-        // TODO: Route to appropriate session
-        // For now, we'll use a simple implementation
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ status: "received" }));
-      } catch (error) {
+    if (!connection) {
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end("Session not found");
+      return;
+    }
+
+    try {
+      await connection.transport.handlePostMessage(req, res);
+    } catch (error) {
+      console.error(`[${new Date().toISOString()}] Error handling message for session ${sessionId}:`, error);
+      if (!res.headersSent) {
         res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: String(error) }));
       }
-    });
+    }
     return;
   }
 
@@ -540,8 +557,10 @@ async function startServer() {
     activeConnections.clear();
 
     // Close SQL connection
-    if (globalSqlPool) {
-      await globalSqlPool.close();
+    const pool = getRawSqlPool();
+    if (pool) {
+      await pool.close();
+      setSqlPool(null);
     }
 
     httpServer.close(() => {
