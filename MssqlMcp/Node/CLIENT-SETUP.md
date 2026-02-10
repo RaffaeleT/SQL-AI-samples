@@ -46,12 +46,27 @@ You should see a JSON response like:
 
 Add or update the `mcpServers` section:
 
+**Option A: Native Streamable HTTP (recommended for recent Claude Desktop versions):**
+
+```json
+{
+  "mcpServers": {
+    "mssql-remote": {
+      "type": "streamableHttp",
+      "url": "http://your-server-ip:3911/mcp"
+    }
+  }
+}
+```
+
+**Option B: Using mcp-remote proxy (if native support is not available):**
+
 ```json
 {
   "mcpServers": {
     "mssql-remote": {
       "command": "npx",
-      "args": ["-y", "@anthropic-ai/mcp-proxy", "http://your-server-ip:3000/mcp", "--allow-http"]
+      "args": ["-y", "mcp-remote", "http://your-server-ip:3911/mcp", "--allow-http"]
     }
   }
 }

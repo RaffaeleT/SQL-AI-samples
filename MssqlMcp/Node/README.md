@@ -140,16 +140,7 @@ Set `AUTH_METHOD` in your `.env` file to choose the authentication method.
 Once the HTTP server is running, clients can connect using the MCP endpoint:
 
 **Claude Desktop Configuration:**
-```json
-{
-  "mcpServers": {
-    "mssql-remote": {
-      "command": "npx",
-      "args": ["-y", "@anthropic-ai/mcp-proxy", "http://your-server-ip:3000/mcp", "--allow-http"]
-    }
-  }
-}
-```
+See [Client-Setup.md](.\CLIENT-SETUP.md)
 
 **VS Code Agent Configuration:**
 ```json
