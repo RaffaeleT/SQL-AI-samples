@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * HTTP SSE Wrapper for MSSQL MCP Server
+ * HTTP Streamable HTTP Wrapper for MSSQL MCP Server
  *
- * This wrapper exposes the MCP server over HTTP using Server-Sent Events (SSE).
+ * This wrapper exposes the MCP server over HTTP using the Streamable HTTP transport.
  * It allows network clients to connect to the MCP server instead of using stdio.
  *
  * TODO (Future Security Enhancements):
@@ -15,15 +15,17 @@
  */
 
 import * as dotenv from "dotenv";
+import { randomUUID } from "node:crypto";
 import { createServer, IncomingMessage, ServerResponse } from "http";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import sql from "mssql";
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
   ListPromptsRequestSchema,
   GetPromptRequestSchema,
+  isInitializeRequest,
 } from "@modelcontextprotocol/sdk/types.js";
 import { readdir, readFile } from "fs/promises";
 import { join, dirname } from "path";
@@ -408,7 +410,20 @@ function createMCPServer(): Server {
 }
 
 // Track active connections
-const activeConnections = new Map<string, { server: Server, transport: SSEServerTransport }>();
+const activeConnections = new Map<string, { server: Server, transport: StreamableHTTPServerTransport }>();
+
+// Helper to read and parse JSON request body
+function parseBody(req: IncomingMessage): Promise<unknown> {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', (chunk: Buffer) => data += chunk.toString());
+    req.on('end', () => {
+      try { resolve(JSON.parse(data)); }
+      catch (e) { reject(e); }
+    });
+    req.on('error', reject);
+  });
+}
 
 // HTTP server handler
 async function handleRequest(req: IncomingMessage, res: ServerResponse) {
@@ -416,8 +431,9 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
 
   // CORS headers (adjust as needed for your network)
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Mcp-Session-Id, Last-Event-Id");
+  res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
 
   if (req.method === "OPTIONS") {
     res.writeHead(200);
@@ -460,51 +476,75 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
     return;
   }
 
-  // SSE endpoint for MCP
-  if (url.pathname === "/sse" && req.method === "GET") {
-    console.error(`[${new Date().toISOString()}] New SSE connection from ${req.socket.remoteAddress}`);
-
-    const mcpServer = createMCPServer();
-    const transport = new SSEServerTransport("/sse", res);
-
-    activeConnections.set(transport.sessionId, { server: mcpServer, transport });
-
-    // Handle disconnection
-    req.on("close", () => {
-      console.error(`[${new Date().toISOString()}] SSE connection closed: ${transport.sessionId}`);
-      activeConnections.delete(transport.sessionId);
-    });
-
+  // Streamable HTTP endpoint for MCP (POST: messages, GET: SSE stream, DELETE: session termination)
+  if (url.pathname === "/mcp" && req.method === "POST") {
     try {
-      await mcpServer.connect(transport);
-      console.error(`[${new Date().toISOString()}] MCP server connected for session: ${transport.sessionId}`);
+      const body = await parseBody(req);
+      const sessionId = req.headers["mcp-session-id"] as string | undefined;
+      let transport: StreamableHTTPServerTransport;
+
+      if (sessionId && activeConnections.has(sessionId)) {
+        // Reuse existing transport
+        transport = activeConnections.get(sessionId)!.transport;
+      } else if (!sessionId && isInitializeRequest(body)) {
+        // New initialization request
+        const mcpServer = createMCPServer();
+        transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: () => randomUUID(),
+          onsessioninitialized: (sid) => {
+            console.error(`[${new Date().toISOString()}] Session initialized: ${sid}`);
+            activeConnections.set(sid, { server: mcpServer, transport });
+          },
+        });
+
+        transport.onclose = () => {
+          const sid = transport.sessionId;
+          if (sid) {
+            console.error(`[${new Date().toISOString()}] Session closed: ${sid}`);
+            activeConnections.delete(sid);
+          }
+        };
+
+        await mcpServer.connect(transport);
+        console.error(`[${new Date().toISOString()}] New connection from ${req.socket.remoteAddress}`);
+      } else {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ jsonrpc: "2.0", error: { code: -32000, message: "Bad Request: No valid session ID provided" }, id: null }));
+        return;
+      }
+
+      await transport.handleRequest(req, res, body);
     } catch (error) {
-      console.error(`[${new Date().toISOString()}] Error connecting MCP server:`, error);
-      activeConnections.delete(transport.sessionId);
+      console.error(`[${new Date().toISOString()}] Error handling POST /mcp:`, error);
+      if (!res.headersSent) {
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ jsonrpc: "2.0", error: { code: -32603, message: "Internal server error" }, id: null }));
+      }
     }
     return;
   }
 
-  // Message endpoint for MCP (POST routed to the correct SSE session)
-  if (url.pathname === "/sse" && req.method === "POST") {
-    const sessionId = url.searchParams.get("sessionId");
-    const connection = sessionId ? activeConnections.get(sessionId) : undefined;
-
-    if (!connection) {
-      res.writeHead(404, { "Content-Type": "text/plain" });
-      res.end("Session not found");
+  if (url.pathname === "/mcp" && req.method === "GET") {
+    const sessionId = req.headers["mcp-session-id"] as string | undefined;
+    if (!sessionId || !activeConnections.has(sessionId)) {
+      res.writeHead(400, { "Content-Type": "text/plain" });
+      res.end("Invalid or missing session ID");
       return;
     }
+    const transport = activeConnections.get(sessionId)!.transport;
+    await transport.handleRequest(req, res);
+    return;
+  }
 
-    try {
-      await connection.transport.handlePostMessage(req, res);
-    } catch (error) {
-      console.error(`[${new Date().toISOString()}] Error handling message for session ${sessionId}:`, error);
-      if (!res.headersSent) {
-        res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: String(error) }));
-      }
+  if (url.pathname === "/mcp" && req.method === "DELETE") {
+    const sessionId = req.headers["mcp-session-id"] as string | undefined;
+    if (!sessionId || !activeConnections.has(sessionId)) {
+      res.writeHead(400, { "Content-Type": "text/plain" });
+      res.end("Invalid or missing session ID");
+      return;
     }
+    const transport = activeConnections.get(sessionId)!.transport;
+    await transport.handleRequest(req, res);
     return;
   }
 
@@ -516,7 +556,7 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
 // Start HTTP server
 async function startServer() {
   console.error("=".repeat(60));
-  console.error("MSSQL MCP Server - HTTP SSE Wrapper");
+  console.error("MSSQL MCP Server - Streamable HTTP");
   console.error("=".repeat(60));
   console.error(`Server Name: ${process.env.SERVER_NAME || 'Not configured'}`);
   console.error(`Database: ${process.env.DATABASE_NAME || 'Not configured'}`);
@@ -538,9 +578,9 @@ async function startServer() {
   const httpServer = createServer(handleRequest);
 
   httpServer.listen(HTTP_PORT, HTTP_HOST, () => {
-    console.error(`✓ HTTP SSE server listening on http://${HTTP_HOST}:${HTTP_PORT}`);
+    console.error(`✓ HTTP server listening on http://${HTTP_HOST}:${HTTP_PORT}`);
     console.error(`✓ Health check: http://${HTTP_HOST}:${HTTP_PORT}/health`);
-    console.error(`✓ SSE endpoint: http://${HTTP_HOST}:${HTTP_PORT}/sse`);
+    console.error(`✓ MCP endpoint: http://${HTTP_HOST}:${HTTP_PORT}/mcp`);
     console.error("");
     console.error("Server is ready to accept connections.");
   });
@@ -550,8 +590,9 @@ async function startServer() {
     console.error("\nShutting down server...");
 
     // Close all active connections
-    for (const [sessionId, { server }] of activeConnections) {
+    for (const [sessionId, { server, transport }] of activeConnections) {
       console.error(`Closing session: ${sessionId}`);
+      await transport.close();
       await server.close();
     }
     activeConnections.clear();

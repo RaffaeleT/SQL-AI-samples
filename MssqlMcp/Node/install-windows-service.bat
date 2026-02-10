@@ -64,7 +64,7 @@ echo.
 echo // Create a new service object
 echo const svc = new Service({
 echo   name: 'MSSQL MCP HTTP Server',
-echo   description: 'HTTP SSE wrapper for MSSQL MCP Server',
+echo   description: 'Streamable HTTP wrapper for MSSQL MCP Server',
 echo   script: path.join(__dirname, 'dist', 'http-server.js'^),
 echo   nodeOptions: [],
 echo   env: [{

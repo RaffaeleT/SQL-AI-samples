@@ -1,8 +1,8 @@
 @echo off
-REM Start script for MSSQL MCP HTTP Server on Windows
+REM Start script for MSSQL MCP HTTP Server (Streamable HTTP) on Windows
 
 echo ============================================================
-echo MSSQL MCP Server - HTTP SSE Server
+echo MSSQL MCP Server - HTTP Server
 echo ============================================================
 echo.
 
@@ -25,7 +25,7 @@ if not exist "dist" (
 )
 
 REM Start the server
-echo Starting HTTP SSE server...
+echo Starting HTTP server...
 echo Press Ctrl+C to stop the server
 echo.
 node dist/http-server.js

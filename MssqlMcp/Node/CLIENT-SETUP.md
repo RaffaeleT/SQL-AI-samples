@@ -1,4 +1,4 @@
-# Client Setup Guide - HTTP SSE Connection
+# Client Setup Guide - Streamable HTTP Connection
 
 This guide explains how to configure Claude Desktop and VS Code Agent to connect to a remote MSSQL MCP HTTP Server.
 
@@ -50,8 +50,8 @@ Add or update the `mcpServers` section:
 {
   "mcpServers": {
     "mssql-remote": {
-      "transport": "sse",
-      "url": "http://your-server-ip:3000/sse"
+      "transport": "http",
+      "url": "http://your-server-ip:3000/mcp"
     }
   }
 }
@@ -62,12 +62,12 @@ Add or update the `mcpServers` section:
 {
   "mcpServers": {
     "mssql-production": {
-      "transport": "sse",
-      "url": "http://192.168.1.100:3000/sse"
+      "transport": "http",
+      "url": "http://192.168.1.100:3000/mcp"
     },
     "mssql-development": {
-      "transport": "sse",
-      "url": "http://192.168.1.101:3000/sse"
+      "transport": "http",
+      "url": "http://192.168.1.101:3000/mcp"
     }
   }
 }
@@ -100,8 +100,8 @@ In a new conversation with Claude:
 {
   "servers": {
     "mssql-remote": {
-      "type": "sse",
-      "url": "http://your-server-ip:3000/sse"
+      "type": "http",
+      "url": "http://your-server-ip:3000/mcp"
     }
   }
 }
@@ -119,8 +119,8 @@ In a new conversation with Claude:
   "mcp": {
     "servers": {
       "mssql-remote": {
-        "type": "sse",
-        "url": "http://your-server-ip:3000/sse"
+        "type": "http",
+        "url": "http://your-server-ip:3000/mcp"
       }
     }
   }
@@ -152,7 +152,7 @@ In a new conversation with Claude:
 
 **Solutions:**
 1. Check Claude Desktop or VS Code logs for errors
-2. Verify the `/sse` endpoint is accessible
+2. Verify the `/mcp` endpoint is accessible
 3. Restart the client application
 4. Check server logs for connection errors
 
@@ -199,7 +199,7 @@ Instead of using IP addresses, configure a DNS name:
 2. Update client configuration:
    ```json
    {
-     "url": "http://mssql-mcp.company.local:3000/sse"
+     "url": "http://mssql-mcp.company.local:3000/mcp"
    }
    ```
 
@@ -211,16 +211,16 @@ You can connect to multiple MCP servers simultaneously:
 {
   "mcpServers": {
     "mssql-hr": {
-      "transport": "sse",
-      "url": "http://hr-server:3000/sse"
+      "transport": "http",
+      "url": "http://hr-server:3000/mcp"
     },
     "mssql-finance": {
-      "transport": "sse",
-      "url": "http://finance-server:3000/sse"
+      "transport": "http",
+      "url": "http://finance-server:3000/mcp"
     },
     "mssql-operations": {
-      "transport": "sse",
-      "url": "http://ops-server:3000/sse"
+      "transport": "http",
+      "url": "http://ops-server:3000/mcp"
     }
   }
 }
@@ -237,7 +237,7 @@ For high-availability setups, use a load balancer:
 3. Point client to load balancer URL:
    ```json
    {
-     "url": "http://mssql-mcp-lb.company.local/sse"
+     "url": "http://mssql-mcp-lb.company.local/mcp"
    }
    ```
 
@@ -263,7 +263,7 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
 
-        # SSE specific
+        # Streamable HTTP / SSE streaming support
         proxy_buffering off;
         proxy_cache off;
         proxy_read_timeout 86400s;
@@ -301,8 +301,8 @@ Until authentication is implemented:
 # Test health endpoint
 curl http://your-server:3000/health
 
-# Test SSE endpoint (should hang waiting for events)
-curl http://your-server:3000/sse
+# Test MCP endpoint (POST with initialize request)
+curl -X POST http://your-server:3000/mcp -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"initialize","id":1,"params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"test","version":"1.0"}}}'
 ```
 
 ### Client Integration Test

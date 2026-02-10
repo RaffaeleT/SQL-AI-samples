@@ -53,11 +53,11 @@ This server leverages the Model Context Protocol (MCP), a versatile framework th
 
 This server can be configured in two ways:
 1. **Local mode** - For personal use with Claude Desktop or VS Code Agent (stdio)
-2. **Network mode** - For sharing across your network via HTTP SSE
+2. **Network mode** - For sharing across your network via Streamable HTTP
 
-### Network Deployment (HTTP SSE Server)
+### Network Deployment (Streamable HTTP Server)
 
-The HTTP SSE server allows you to share the MCP server across your network, enabling multiple clients to connect remotely.
+The Streamable HTTP server allows you to share the MCP server across your network, enabling multiple clients to connect remotely.
 
 #### Quick Setup (Windows)
 
@@ -131,12 +131,13 @@ Set `AUTH_METHOD` in your `.env` file to choose the authentication method.
 #### HTTP Endpoints
 
 - `GET /health` - Health check endpoint
-- `GET /sse` - Server-Sent Events endpoint for MCP connections
-- `POST /message` - Message endpoint for client communication
+- `POST /mcp` - MCP message endpoint (initialization and requests)
+- `GET /mcp` - SSE stream for server-to-client notifications
+- `DELETE /mcp` - Session termination
 
 #### Connecting Clients to HTTP Server
 
-Once the HTTP server is running, clients can connect using the SSE endpoint:
+Once the HTTP server is running, clients can connect using the MCP endpoint:
 
 **Claude Desktop Configuration:**
 ```json
@@ -144,7 +145,7 @@ Once the HTTP server is running, clients can connect using the SSE endpoint:
   "mcpServers": {
     "mssql-remote": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "http://localhost:3911/sse"]
+      "args": ["-y", "mcp-remote", "http://localhost:3000/mcp"]
     }
   }
 }
@@ -156,8 +157,8 @@ Once the HTTP server is running, clients can connect using the SSE endpoint:
   "mcp": {
     "servers": {
       "mssql-remote": {
-        "type": "sse",
-        "url": "http://your-server-ip:3000/sse"
+        "type": "http",
+        "url": "http://your-server-ip:3000/mcp"
       }
     }
   }
