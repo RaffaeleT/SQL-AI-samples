@@ -145,7 +145,7 @@ Once the HTTP server is running, clients can connect using the MCP endpoint:
   "mcpServers": {
     "mssql-remote": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "http://localhost:3000/mcp"]
+      "args": ["-y", "@anthropic-ai/mcp-proxy", "http://your-server-ip:3000/mcp", "--allow-http"]
     }
   }
 }
@@ -165,20 +165,49 @@ Once the HTTP server is running, clients can connect using the MCP endpoint:
 }
 ```
 
+#### Enabling HTTPS
+
+The HTTP server supports HTTPS. Set the following environment variables in your `.env` file to enable TLS:
+
+```env
+SSL_KEY_PATH=./certs/server.key
+SSL_CERT_PATH=./certs/server.crt
+# Optional: CA bundle for intermediate certificates
+# SSL_CA_PATH=./certs/ca.crt
+```
+
+When both `SSL_KEY_PATH` and `SSL_CERT_PATH` are set the server starts on HTTPS. Without them it falls back to plain HTTP.
+
+**Generating a self-signed certificate for testing:**
+```bash
+openssl req -x509 -newkey rsa:2048 -nodes -keyout certs/server.key -out certs/server.crt -days 365 -subj "/CN=localhost"
+```
+
+**Claude Desktop remote configuration (HTTPS):**
+```json
+{
+  "mcpServers": {
+    "mssql-remote": {
+      "url": "https://your-server-ip:3000/mcp"
+    }
+  }
+}
+```
+
 #### Security Considerations (TODO)
 
 ⚠️ **This initial implementation is for internal corporate networks only.**
 
 **Current Status:**
 - No authentication implemented
-- No HTTPS/SSL encryption
+- HTTPS/SSL encryption supported (see above)
 - No audit logging
 - No access control
 
 **Planned Security Enhancements:**
 - [ ] Token-based authentication
 - [ ] Active Directory integration
-- [ ] HTTPS with SSL certificates
+- [x] HTTPS with SSL certificates
 - [ ] Audit logging for all queries and access
 - [ ] Firewall rules and IP whitelisting
 - [ ] Rate limiting

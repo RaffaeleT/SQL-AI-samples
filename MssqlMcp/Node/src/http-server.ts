@@ -1,22 +1,26 @@
 #!/usr/bin/env node
 
 /**
- * HTTP Streamable HTTP Wrapper for MSSQL MCP Server
+ * HTTP/HTTPS Streamable HTTP Wrapper for MSSQL MCP Server
  *
- * This wrapper exposes the MCP server over HTTP using the Streamable HTTP transport.
+ * This wrapper exposes the MCP server over HTTP(S) using the Streamable HTTP transport.
  * It allows network clients to connect to the MCP server instead of using stdio.
+ *
+ * HTTPS: Set SSL_KEY_PATH and SSL_CERT_PATH environment variables to enable HTTPS.
+ *        Optionally set SSL_CA_PATH for a CA bundle (e.g. intermediate certificates).
  *
  * TODO (Future Security Enhancements):
  * - Add token-based authentication
  * - Integrate with Active Directory
- * - Add HTTPS support with SSL certificates
  * - Implement audit logging for queries and access
  * - Add firewall rules and IP whitelisting
  */
 
 import * as dotenv from "dotenv";
 import { randomUUID } from "node:crypto";
-import { createServer, IncomingMessage, ServerResponse } from "http";
+import { readFileSync } from "fs";
+import { createServer as createHttpServer, IncomingMessage, ServerResponse } from "http";
+import { createServer as createHttpsServer } from "https";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import sql from "mssql";
@@ -553,34 +557,60 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
   res.end("Not Found");
 }
 
-// Start HTTP server
+// Start HTTP/HTTPS server
 async function startServer() {
+  const sslKeyPath = process.env.SSL_KEY_PATH;
+  const sslCertPath = process.env.SSL_CERT_PATH;
+  const sslCaPath = process.env.SSL_CA_PATH;
+  const useHttps = !!(sslKeyPath && sslCertPath);
+  const protocol = useHttps ? "https" : "http";
+
   console.error("=".repeat(60));
-  console.error("MSSQL MCP Server - Streamable HTTP");
+  console.error(`MSSQL MCP Server - Streamable ${protocol.toUpperCase()}`);
   console.error("=".repeat(60));
   console.error(`Server Name: ${process.env.SERVER_NAME || 'Not configured'}`);
   console.error(`Database: ${process.env.DATABASE_NAME || 'Not configured'}`);
   console.error(`Auth Method: ${authMethod}`);
   console.error(`Read-Only Mode: ${isReadOnly}`);
-  console.error(`HTTP Host: ${HTTP_HOST}`);
-  console.error(`HTTP Port: ${HTTP_PORT}`);
+  console.error(`${protocol.toUpperCase()} Host: ${HTTP_HOST}`);
+  console.error(`${protocol.toUpperCase()} Port: ${HTTP_PORT}`);
+  if (useHttps) {
+    console.error(`SSL Key: ${sslKeyPath}`);
+    console.error(`SSL Cert: ${sslCertPath}`);
+    if (sslCaPath) console.error(`SSL CA: ${sslCaPath}`);
+  }
   console.error("=".repeat(60));
   console.error("");
   console.error("TODO - Future Security Enhancements:");
   console.error("  - Add token-based authentication");
   console.error("  - Integrate with Active Directory");
-  console.error("  - Add HTTPS support with SSL certificates");
   console.error("  - Implement audit logging for queries and access");
   console.error("  - Add firewall rules and IP whitelisting");
   console.error("=".repeat(60));
   console.error("");
 
-  const httpServer = createServer(handleRequest);
+  let httpServer;
+  if (useHttps) {
+    const tlsOptions: { key: Buffer; cert: Buffer; ca?: Buffer } = {
+      key: readFileSync(sslKeyPath),
+      cert: readFileSync(sslCertPath),
+    };
+    if (sslCaPath) {
+      tlsOptions.ca = readFileSync(sslCaPath);
+    }
+    httpServer = createHttpsServer(tlsOptions, handleRequest);
+  } else {
+    httpServer = createHttpServer(handleRequest);
+  }
 
   httpServer.listen(HTTP_PORT, HTTP_HOST, () => {
-    console.error(`✓ HTTP server listening on http://${HTTP_HOST}:${HTTP_PORT}`);
-    console.error(`✓ Health check: http://${HTTP_HOST}:${HTTP_PORT}/health`);
-    console.error(`✓ MCP endpoint: http://${HTTP_HOST}:${HTTP_PORT}/mcp`);
+    console.error(`✓ ${protocol.toUpperCase()} server listening on ${protocol}://${HTTP_HOST}:${HTTP_PORT}`);
+    console.error(`✓ Health check: ${protocol}://${HTTP_HOST}:${HTTP_PORT}/health`);
+    console.error(`✓ MCP endpoint: ${protocol}://${HTTP_HOST}:${HTTP_PORT}/mcp`);
+    if (!useHttps) {
+      console.error("");
+      console.error("⚠ Running without TLS. Set SSL_KEY_PATH and SSL_CERT_PATH to enable HTTPS.");
+    }
     console.error("");
     console.error("Server is ready to accept connections.");
   });

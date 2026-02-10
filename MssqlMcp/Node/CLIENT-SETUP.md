@@ -50,28 +50,13 @@ Add or update the `mcpServers` section:
 {
   "mcpServers": {
     "mssql-remote": {
-      "transport": "http",
-      "url": "http://your-server-ip:3000/mcp"
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-proxy", "http://your-server-ip:3000/mcp", "--allow-http"]
     }
   }
 }
 ```
 
-**Example with multiple servers:**
-```json
-{
-  "mcpServers": {
-    "mssql-production": {
-      "transport": "http",
-      "url": "http://192.168.1.100:3000/mcp"
-    },
-    "mssql-development": {
-      "transport": "http",
-      "url": "http://192.168.1.101:3000/mcp"
-    }
-  }
-}
-```
 
 ### Step 3: Restart Claude Desktop
 
