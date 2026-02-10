@@ -17,7 +17,8 @@
       "Bash(timeout:*)",
       "Bash(curl:*)",
       "Bash(ping:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(dir:*)"
     ]
   }
 }
