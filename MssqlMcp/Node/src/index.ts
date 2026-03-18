@@ -190,7 +190,7 @@ interface PromptInfo {
 
 async function discoverPrompts(): Promise<PromptInfo[]> {
   try {
-    const promptsDir = join(__dirname, "..", "prompts");
+    const promptsDir = join(__dirname, "prompts");
     const files = await readdir(promptsDir);
 
     const prompts: PromptInfo[] = [];
