@@ -6,7 +6,7 @@
     "mssql-mcp-server": "dist/index.js"
   },
   "scripts": {
-    "build": "tsc && shx chmod +x dist/*.js && shx cp -r prompts dist/prompts",
+    "build": "tsc && shx chmod +x dist/*.js && shx cp -r prompts dist/prompts && node -e \"const p=require('./package.json');const d={name:p.name,version:p.version,type:p.type,dependencies:p.dependencies};require('fs').writeFileSync('dist/package.json',JSON.stringify(d,null,2))\"",
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "start": "node dist/index.js"
