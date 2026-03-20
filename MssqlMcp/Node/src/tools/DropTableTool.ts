@@ -1,5 +1,5 @@
-import sql from "mssql";
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
+import { getSqlPool } from "../index.js";
 
 export class DropTableTool implements Tool {
   [key: string]: any;
@@ -21,7 +21,8 @@ export class DropTableTool implements Tool {
         throw new Error("Invalid table name.");
       }
       const query = `DROP TABLE [${tableName}]`;
-      await new sql.Request().query(query);
+      const pool = getSqlPool();
+      await pool.request().query(query);
       return {
         success: true,
         message: `Table '${tableName}' dropped successfully.`

@@ -1,5 +1,5 @@
-import sql from "mssql";
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
+import { getSqlPool } from "../index.js";
 
 
 export class DescribeTableTool implements Tool {
@@ -17,9 +17,10 @@ export class DescribeTableTool implements Tool {
   async run(params: { tableName: string }) {
     try {
       const { tableName } = params;
-      const request = new sql.Request();
+      const pool = getSqlPool();
+      const request = pool.request();
       const query = `SELECT COLUMN_NAME as name, DATA_TYPE as type FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @tableName`;
-      request.input("tableName", sql.NVarChar, tableName);
+      request.input("tableName", tableName);
       const result = await request.query(query);
       return {
         success: true,

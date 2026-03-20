@@ -1,5 +1,5 @@
-import sql from "mssql";
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
+import { getSqlPool } from "../index.js";
 export class InsertDataTool implements Tool {
   [key: string]: any;
   name = "insert_data";
@@ -93,7 +93,8 @@ IMPORTANT RULES:
         }
       }
       const columns = firstRecordColumns.join(", ");
-      const request = new sql.Request();
+      const pool = getSqlPool();
+      const request = pool.request();
       if (isMultipleRecords) {
         // Multiple records insert using VALUES clause - works for 1 or more records
         const valueClauses: string[] = [];
