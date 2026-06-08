@@ -51,6 +51,24 @@
         "TRUST_SERVER_CERTIFICATE": "true",
         "READONLY": "false"
       }
+    },
+    "mssql-http-sse-local": {
+      "_comment": "HTTP SSE transport - connect to a server started with 'npm run start:http' on this machine. Claude Desktop has no native SSE client, so it bridges through 'mcp-remote' (fetched via npx). Database credentials live in the server's .env, NOT here.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://localhost:3000/sse"
+      ]
+    },
+    "mssql-http-sse-lan": {
+      "_comment": "HTTP SSE transport - connect to the MCP SSE server running on another host on your LAN. Set HTTP_HOST=0.0.0.0 and HTTP_PORT on the server, and replace the host/port below. Use 'http://<host>:<port>/sse'.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://your-server-host:3000/sse"
+      ]
     }
   }
 }

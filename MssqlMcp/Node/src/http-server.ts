@@ -46,7 +46,6 @@ const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse
       };
 
       await server.connect(transport);
-      await transport.start();
       return;
     }
 
