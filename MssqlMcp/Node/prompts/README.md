@@ -32,7 +32,9 @@ To add a new prompt:
 
 3. Write your prompt content below (the entire file content will be sent to Claude)
 
-4. Restart the MCP server - your prompt will be automatically discovered!
+4. **Rebuild and restart** the MCP server (`npm run build` then restart) - your prompt will be automatically discovered!
+
+   > ⚠️ The server reads prompts from `dist/prompts/`, which is populated by the build step. Editing a file in this `prompts/` source folder has **no effect until you rebuild** - a plain restart is not enough.
 
 ## Example: Creating a Schema Documentation Prompt
 

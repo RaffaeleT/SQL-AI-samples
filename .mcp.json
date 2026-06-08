@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "docupoint-prod": {
+      "command": "node",
+      "args": [
+        "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\dist\\index.js"
+      ],
+      "env": {
+        "SERVER_NAME": "bbi-production",
+        "DATABASE_NAME": "docupoint_bb",
+        "READONLY": "true",
+        "AUTH_METHOD": "windows-integrated",
+        "TRUST_SERVER_CERTIFICATE": "true"
+      }
+    }
+  }
+}
