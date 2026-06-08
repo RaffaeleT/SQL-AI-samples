@@ -1,0 +1,1 @@
+{"nodes": [{"id": "c_repos_sql_ai_samples_agentmode_github_tsql_install_ensure_tsqlt_installed_ps1", "label": "ensure-tsqlt-installed.ps1", "file_type": "code", "source_file": "AgentMode/.github/tsql/install/ensure-tsqlt-installed.ps1", "source_location": "L1"}], "edges": [], "raw_calls": []}

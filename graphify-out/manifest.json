@@ -1,0 +1,672 @@
+{
+  "C:\\Repos\\SQL-AI-samples\\.claude\\settings.local.json": {
+    "mtime": 1774024327.2828264,
+    "ast_hash": "584db8cd915be939fda546573557e5e1",
+    "semantic_hash": "584db8cd915be939fda546573557e5e1"
+  },
+  "C:\\Repos\\SQL-AI-samples\\.devcontainer\\java\\devcontainer.json": {
+    "mtime": 1752323108.6696048,
+    "ast_hash": "6073c301182face6054063f8ac146e12",
+    "semantic_hash": "6073c301182face6054063f8ac146e12"
+  },
+  "C:\\Repos\\SQL-AI-samples\\.devcontainer\\python\\devcontainer.json": {
+    "mtime": 1752323108.6716065,
+    "ast_hash": "f5fe0cf93878bec3d94b04711bf096fb",
+    "semantic_hash": "f5fe0cf93878bec3d94b04711bf096fb"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\inner-loop\\Build.ps1": {
+    "mtime": 1752323108.6766121,
+    "ast_hash": "f2b655de9bccdf85f95217e86f475a34",
+    "semantic_hash": "f2b655de9bccdf85f95217e86f475a34"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\inner-loop\\Publish.ps1": {
+    "mtime": 1752323108.6786141,
+    "ast_hash": "f104a443f9dc79c51bb72fa919dde952",
+    "semantic_hash": "f104a443f9dc79c51bb72fa919dde952"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\inner-loop\\Test.ps1": {
+    "mtime": 1752323108.6796148,
+    "ast_hash": "f32a89615ae10b5365cd0a3543970a4c",
+    "semantic_hash": "f32a89615ae10b5365cd0a3543970a4c"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\install\\copy-tsqlt.dacpac-file.ps1": {
+    "mtime": 1752323108.6806128,
+    "ast_hash": "48f6ed2dff8141ccae4f6521464d97d4",
+    "semantic_hash": "48f6ed2dff8141ccae4f6521464d97d4"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\install\\create-mssql-instance-using-sqlcmd.ps1": {
+    "mtime": 1752323108.6816344,
+    "ast_hash": "b8eacda7cbfd6e1e5f5ddd5b68686121",
+    "semantic_hash": "b8eacda7cbfd6e1e5f5ddd5b68686121"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\install\\ensure-build-sql-templates-installed.ps1": {
+    "mtime": 1752323108.682613,
+    "ast_hash": "fc5978a6f216e35affdc07a4682deafe",
+    "semantic_hash": "fc5978a6f216e35affdc07a4682deafe"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\install\\ensure-sqlcmd-installed.ps1": {
+    "mtime": 1752323108.682613,
+    "ast_hash": "93cb6909784a6d968e376152770525c4",
+    "semantic_hash": "93cb6909784a6d968e376152770525c4"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\install\\ensure-sqlpackage-installed.ps1": {
+    "mtime": 1752323108.6836123,
+    "ast_hash": "41622d390ba3fd260415a202ee7c49c2",
+    "semantic_hash": "41622d390ba3fd260415a202ee7c49c2"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\install\\ensure-tsqlt-installed.ps1": {
+    "mtime": 1752323108.684613,
+    "ast_hash": "011284c9581b1a2d8dc18403c736cf3a",
+    "semantic_hash": "011284c9581b1a2d8dc18403c736cf3a"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\install\\get-sql-connection-string.ps1": {
+    "mtime": 1752323108.684613,
+    "ast_hash": "4503f5f05d815804122b9ecaf44ac57d",
+    "semantic_hash": "4503f5f05d815804122b9ecaf44ac57d"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\install\\is-container-runtime-running.ps1": {
+    "mtime": 1752323108.6856124,
+    "ast_hash": "8425728aec3641f98c0c4f60ba314678",
+    "semantic_hash": "8425728aec3641f98c0c4f60ba314678"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\ContentModeration\\contentSafety.sql": {
+    "mtime": 1752323108.6971548,
+    "ast_hash": "8c23b8807b650a005545bdd3c101d44e",
+    "semantic_hash": "8c23b8807b650a005545bdd3c101d44e"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\ContentModeration\\languageAI.sql": {
+    "mtime": 1752323108.6981342,
+    "ast_hash": "630464b8fb0090e405bec4397d7bcabf",
+    "semantic_hash": "630464b8fb0090e405bec4397d7bcabf"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\LangChain\\database.sql": {
+    "mtime": 1752323108.7021334,
+    "ast_hash": "2b5629cee57a7535eda5778162a8176d",
+    "semantic_hash": "2b5629cee57a7535eda5778162a8176d"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\bicycle_data_prompt.json": {
+    "mtime": 1752323108.7151344,
+    "ast_hash": "ae247e7e88efd515ea789cfebc8356e5",
+    "semantic_hash": "ae247e7e88efd515ea789cfebc8356e5"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_database.sql": {
+    "mtime": 1752323108.7251334,
+    "ast_hash": "da9a05f71e394dfad62ff1a62ef359b0",
+    "semantic_hash": "da9a05f71e394dfad62ff1a62ef359b0"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_etl_errorlog_table.sql": {
+    "mtime": 1752323108.7261336,
+    "ast_hash": "9fc240437463649cfb672553dcc5e9a8",
+    "semantic_hash": "9fc240437463649cfb672553dcc5e9a8"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_etl_errorlog_usp.sql": {
+    "mtime": 1752323108.7271404,
+    "ast_hash": "cb7c8fbde493374ab2e99220180ca71e",
+    "semantic_hash": "cb7c8fbde493374ab2e99220180ca71e"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_etl_process_schema.sql": {
+    "mtime": 1752323108.7281325,
+    "ast_hash": "51e7da4b963a03e5365ee2e73afdf1e2",
+    "semantic_hash": "51e7da4b963a03e5365ee2e73afdf1e2"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_etl_processlog_table.sql": {
+    "mtime": 1752323108.7281325,
+    "ast_hash": "f56398c8eed9345d99b94db82dbfa11b",
+    "semantic_hash": "f56398c8eed9345d99b94db82dbfa11b"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_etl_processlog_usp.sql": {
+    "mtime": 1752323108.7291331,
+    "ast_hash": "6a0d6ef78e81ba94fb668012e34a28cd",
+    "semantic_hash": "6a0d6ef78e81ba94fb668012e34a28cd"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_prd_table.sql": {
+    "mtime": 1752323108.7301323,
+    "ast_hash": "537eea103fc83e8853bce1fe00cf9a96",
+    "semantic_hash": "537eea103fc83e8853bce1fe00cf9a96"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_procedure.sql": {
+    "mtime": 1752323108.7301323,
+    "ast_hash": "d318141d9928eb0d2fad40eb17e44251",
+    "semantic_hash": "d318141d9928eb0d2fad40eb17e44251"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_stage_schema.sql": {
+    "mtime": 1752323108.7311335,
+    "ast_hash": "57ff603c3efc2274543742e5f92937fb",
+    "semantic_hash": "57ff603c3efc2274543742e5f92937fb"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_stage_table.sql": {
+    "mtime": 1752323108.7321322,
+    "ast_hash": "dad947c231abc7d60e271ea653bcdd16",
+    "semantic_hash": "dad947c231abc7d60e271ea653bcdd16"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\create_view.sql": {
+    "mtime": 1752323108.7321322,
+    "ast_hash": "8465336250aab6b0c7ed571ea144f754",
+    "semantic_hash": "8465336250aab6b0c7ed571ea144f754"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\creates_prd_chema.sql": {
+    "mtime": 1752323108.733133,
+    "ast_hash": "82401f3719822198fd3409ca333ee693",
+    "semantic_hash": "82401f3719822198fd3409ca333ee693"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\load_prd_data_table.sql": {
+    "mtime": 1752323108.7341328,
+    "ast_hash": "68e147a54fe7694c4ffef64bbb805862",
+    "semantic_hash": "68e147a54fe7694c4ffef64bbb805862"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\tsql\\load_staging_data_table.sql": {
+    "mtime": 1752323108.7351327,
+    "ast_hash": "38a895e989a0c9da3696337d33be0e2c",
+    "semantic_hash": "38a895e989a0c9da3696337d33be0e2c"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\batch_run_and_eval.py": {
+    "mtime": 1752323108.7451384,
+    "ast_hash": "9e1b348cc00e2a853f8414c296bb2ffd",
+    "semantic_hash": "9e1b348cc00e2a853f8414c296bb2ffd"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\configs\\flow_config_sample.json": {
+    "mtime": 1752323108.7461405,
+    "ast_hash": "9a2cef1977ae95ee652729e75dee2c3a",
+    "semantic_hash": "9a2cef1977ae95ee652729e75dee2c3a"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\configs\\key_config_local_sample.json": {
+    "mtime": 1752323108.747139,
+    "ast_hash": "03c35b9cef08f19079ccd1f14fac3128",
+    "semantic_hash": "03c35b9cef08f19079ccd1f14fac3128"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\deploy.py": {
+    "mtime": 1752323108.7531385,
+    "ast_hash": "8b60e6eee67b8b20cf938f6e554c217f",
+    "semantic_hash": "8b60e6eee67b8b20cf938f6e554c217f"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\evaluation\\aggregate_variants_results.py": {
+    "mtime": 1752323108.7616537,
+    "ast_hash": "981c0581214df3d2f8f1e9e2dac5bafa",
+    "semantic_hash": "981c0581214df3d2f8f1e9e2dac5bafa"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\evaluation\\concat_scores.py": {
+    "mtime": 1752323108.7626545,
+    "ast_hash": "6332cc33af6fc021aa48e9b4c98a4bde",
+    "semantic_hash": "6332cc33af6fc021aa48e9b4c98a4bde"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\.promptflow\\chat.detail.json": {
+    "mtime": 1752323108.7676523,
+    "ast_hash": "7385c5407a071a82219454d4d1ad47a5",
+    "semantic_hash": "7385c5407a071a82219454d4d1ad47a5"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\.promptflow\\chat.output.json": {
+    "mtime": 1752323108.768657,
+    "ast_hash": "70ace1e50823414b764f777f0a5c1aba",
+    "semantic_hash": "70ace1e50823414b764f777f0a5c1aba"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\.promptflow\\flow.detail.json": {
+    "mtime": 1752323108.7696548,
+    "ast_hash": "99914b932bd37a50b983c5e7c90ae93b",
+    "semantic_hash": "99914b932bd37a50b983c5e7c90ae93b"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\.promptflow\\flow.layout.json": {
+    "mtime": 1752323108.7696548,
+    "ast_hash": "a560caf1840575fe84d2bb45af369ece",
+    "semantic_hash": "a560caf1840575fe84d2bb45af369ece"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\.promptflow\\flow.tools.json": {
+    "mtime": 1752323108.7716558,
+    "ast_hash": "57a6a9655f0c4354699a67df94af370d",
+    "semantic_hash": "57a6a9655f0c4354699a67df94af370d"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\get_retrieved_documents.py": {
+    "mtime": 1752323108.779665,
+    "ast_hash": "cbb05d1e2adb66a8770ce58954f4f1f4",
+    "semantic_hash": "cbb05d1e2adb66a8770ce58954f4f1f4"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\retrieve_customer.py": {
+    "mtime": 1768575083.5398538,
+    "ast_hash": "9ac8bfe78de92c0fa82e9a7a767e2bb9",
+    "semantic_hash": "9ac8bfe78de92c0fa82e9a7a767e2bb9"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\retrieve_orders.py": {
+    "mtime": 1752323108.7826655,
+    "ast_hash": "44d770cbfc8fef896d4aa03a6f49ee6c",
+    "semantic_hash": "44d770cbfc8fef896d4aa03a6f49ee6c"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\retrieve_products.py": {
+    "mtime": 1752323108.7836661,
+    "ast_hash": "783de5d496f2080d29b08bf78b275862",
+    "semantic_hash": "783de5d496f2080d29b08bf78b275862"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\retrieve_products_stats.py": {
+    "mtime": 1752323108.784667,
+    "ast_hash": "954522edac79fd3e4d656f686aeffc9b",
+    "semantic_hash": "954522edac79fd3e4d656f686aeffc9b"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow_v2\\get_customer.py": {
+    "mtime": 1752323108.7886667,
+    "ast_hash": "892f2585afb37ad06490abb963ab8a74",
+    "semantic_hash": "892f2585afb37ad06490abb963ab8a74"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow_v2\\get_pastorders.py": {
+    "mtime": 1752323108.7896662,
+    "ast_hash": "d78a351430fda6e626d01c4fdec6eb48",
+    "semantic_hash": "d78a351430fda6e626d01c4fdec6eb48"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow_v2\\get_product.py": {
+    "mtime": 1752323108.7896662,
+    "ast_hash": "1c9a0fbfd4ff98a46538056526c89eaa",
+    "semantic_hash": "1c9a0fbfd4ff98a46538056526c89eaa"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow_v2\\get_produt_stats.py": {
+    "mtime": 1752323108.7911737,
+    "ast_hash": "9aa57a801aba443d5f9bba1c832fd128",
+    "semantic_hash": "9aa57a801aba443d5f9bba1c832fd128"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow_v2\\get_retrieved_documents.py": {
+    "mtime": 1752323108.7911737,
+    "ast_hash": "599d34390f5c26a5e5d4b98d4b94976f",
+    "semantic_hash": "599d34390f5c26a5e5d4b98d4b94976f"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow_v2\\sql_query_store.py": {
+    "mtime": 1752323108.7931814,
+    "ast_hash": "b70b15705875edc4e5313f4b6921f396",
+    "semantic_hash": "b70b15705875edc4e5313f4b6921f396"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\run.py": {
+    "mtime": 1752323108.794179,
+    "ast_hash": "5a92d84c4b78b42ce17c076814c8bf0c",
+    "semantic_hash": "5a92d84c4b78b42ce17c076814c8bf0c"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\setup.py": {
+    "mtime": 1752323108.794179,
+    "ast_hash": "f51530a2a472f51c4e1b4e27f1f8bdb2",
+    "semantic_hash": "f51530a2a472f51c4e1b4e27f1f8bdb2"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\.claude\\settings.local.json": {
+    "mtime": 1774024327.2868261,
+    "ast_hash": "05a2d3611c0a502f5707599b1ee26161",
+    "semantic_hash": "05a2d3611c0a502f5707599b1ee26161"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\package.json": {
+    "mtime": 1774024559.4364607,
+    "ast_hash": "36384cfac38f480b41aded4af9e24996",
+    "semantic_hash": "36384cfac38f480b41aded4af9e24996"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\db.ts": {
+    "mtime": 1774024409.8058121,
+    "ast_hash": "75b64c2984e50b8e8bf60043571cc5de",
+    "semantic_hash": "75b64c2984e50b8e8bf60043571cc5de"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\http-server.ts": {
+    "mtime": 1774024501.1588383,
+    "ast_hash": "479bd98d1dadb8fdc8f44ff8c90064db",
+    "semantic_hash": "479bd98d1dadb8fdc8f44ff8c90064db"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\index.ts": {
+    "mtime": 1774024468.0754478,
+    "ast_hash": "aef7dedbfdba9c032948c7c7a4f0e4c1",
+    "semantic_hash": "aef7dedbfdba9c032948c7c7a4f0e4c1"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\samples\\claude_desktop_config.json": {
+    "mtime": 1774024327.3053775,
+    "ast_hash": "e16d3c9622b8b6590d4d89406938d7e8",
+    "semantic_hash": "e16d3c9622b8b6590d4d89406938d7e8"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\samples\\vscode_agent_config.json": {
+    "mtime": 1768575054.6972127,
+    "ast_hash": "2f811f3af37f9fbde5021074067a5d16",
+    "semantic_hash": "2f811f3af37f9fbde5021074067a5d16"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\server-core.ts": {
+    "mtime": 1774024447.4269764,
+    "ast_hash": "b3e400b45e38d4f29651d1aefc355e99",
+    "semantic_hash": "b3e400b45e38d4f29651d1aefc355e99"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\tools\\CreateIndexTool.ts": {
+    "mtime": 1774024536.7426763,
+    "ast_hash": "000ab008919d3a26686c6790990e1603",
+    "semantic_hash": "000ab008919d3a26686c6790990e1603"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\tools\\CreateTableTool.ts": {
+    "mtime": 1774024537.796831,
+    "ast_hash": "3750e8b2b7e48b3192048c12707ec56e",
+    "semantic_hash": "3750e8b2b7e48b3192048c12707ec56e"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\tools\\DescribeTableTool.ts": {
+    "mtime": 1774024539.8718188,
+    "ast_hash": "73830cf8bd28675428ea232fcd7d80a1",
+    "semantic_hash": "73830cf8bd28675428ea232fcd7d80a1"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\tools\\DropTableTool.ts": {
+    "mtime": 1774024538.8390796,
+    "ast_hash": "18de408175c3f4b86daed283bef0be37",
+    "semantic_hash": "18de408175c3f4b86daed283bef0be37"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\tools\\InsertDataTool.ts": {
+    "mtime": 1774024540.916615,
+    "ast_hash": "6592f379450ea5310b60910bc9c1585b",
+    "semantic_hash": "6592f379450ea5310b60910bc9c1585b"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\tools\\ListTableTool.ts": {
+    "mtime": 1774024541.9653444,
+    "ast_hash": "ed7f4953f295640e16bd9bdcde2a7d6d",
+    "semantic_hash": "ed7f4953f295640e16bd9bdcde2a7d6d"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\tools\\ReadDataTool.ts": {
+    "mtime": 1774024543.004849,
+    "ast_hash": "05408c242e7e76b746fc0a0e20c06a12",
+    "semantic_hash": "05408c242e7e76b746fc0a0e20c06a12"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\tools\\UpdateDataTool.ts": {
+    "mtime": 1774024544.0582652,
+    "ast_hash": "9660b2c03a9d0a76bc7aeb8731cb7073",
+    "semantic_hash": "9660b2c03a9d0a76bc7aeb8731cb7073"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\tsconfig.json": {
+    "mtime": 1752323108.8133583,
+    "ast_hash": "1460abff616f858aa1d77b8a86c0821f",
+    "semantic_hash": "1460abff616f858aa1d77b8a86c0821f"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp.Tests\\MssqlMcp.Tests.csproj": {
+    "mtime": 1752323108.8178558,
+    "ast_hash": "377c6b59a6a65f8fe775e072765d68f6",
+    "semantic_hash": "377c6b59a6a65f8fe775e072765d68f6"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp.Tests\\UnitTests.cs": {
+    "mtime": 1752323108.8188558,
+    "ast_hash": "2912a840aab9082830c6f6420dfe7865",
+    "semantic_hash": "2912a840aab9082830c6f6420dfe7865"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp.Tests\\obj\\Debug\\net8.0\\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs": {
+    "mtime": 1768574096.622826,
+    "ast_hash": "9b225453b5a8008eefb62f6c5c66ce15",
+    "semantic_hash": "9b225453b5a8008eefb62f6c5c66ce15"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp.Tests\\obj\\Debug\\net8.0\\MssqlMcp.Tests.AssemblyInfo.cs": {
+    "mtime": 1770648573.7060616,
+    "ast_hash": "137c79acec2b56fa3d0d0e8e36e2fd99",
+    "semantic_hash": "137c79acec2b56fa3d0d0e8e36e2fd99"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp.Tests\\obj\\Debug\\net8.0\\MssqlMcp.Tests.GlobalUsings.g.cs": {
+    "mtime": 1768574095.7464788,
+    "ast_hash": "535736b170e2841ba51152623818eddd",
+    "semantic_hash": "535736b170e2841ba51152623818eddd"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp.Tests\\obj\\MssqlMcp.Tests.csproj.nuget.dgspec.json": {
+    "mtime": 1771513913.0778162,
+    "ast_hash": "ed6e82e9958e4e7bc0dfe081ab0d4dc1",
+    "semantic_hash": "ed6e82e9958e4e7bc0dfe081ab0d4dc1"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp.Tests\\obj\\project.assets.json": {
+    "mtime": 1771513913.0652924,
+    "ast_hash": "f965eaa28b239aa2e6027b5a943b686d",
+    "semantic_hash": "f965eaa28b239aa2e6027b5a943b686d"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp.sln": {
+    "mtime": 1752323108.8188558,
+    "ast_hash": "517268c7f191af11e49b8c9ecc75d510",
+    "semantic_hash": "517268c7f191af11e49b8c9ecc75d510"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\DbOperationResult.cs": {
+    "mtime": 1752323108.8198574,
+    "ast_hash": "fa453fa6abc0630403c508d1966a6dc4",
+    "semantic_hash": "fa453fa6abc0630403c508d1966a6dc4"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\ISqlConnectionFactory.cs": {
+    "mtime": 1752323108.8208578,
+    "ast_hash": "d5d64bcd33a1065726d9032215feacee",
+    "semantic_hash": "d5d64bcd33a1065726d9032215feacee"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\MssqlMcp.csproj": {
+    "mtime": 1752323108.8218565,
+    "ast_hash": "ace767e07c291f8fd4143b9a130ca2e3",
+    "semantic_hash": "ace767e07c291f8fd4143b9a130ca2e3"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Program.cs": {
+    "mtime": 1752323108.8218565,
+    "ast_hash": "8eaa65b9ad69dcb782d09a3ee1b45a0c",
+    "semantic_hash": "8eaa65b9ad69dcb782d09a3ee1b45a0c"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\SqlConnectionFactory.cs": {
+    "mtime": 1752323108.8228579,
+    "ast_hash": "a3a30ded01f6b540e4dacd58af241f2f",
+    "semantic_hash": "a3a30ded01f6b540e4dacd58af241f2f"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Tools\\CreateTable.cs": {
+    "mtime": 1752323108.8238566,
+    "ast_hash": "b500380d923867f3fdcf9cf6b7b02699",
+    "semantic_hash": "b500380d923867f3fdcf9cf6b7b02699"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Tools\\DescribeTable.cs": {
+    "mtime": 1768575083.5472095,
+    "ast_hash": "20f9ca087eaf5c7541000476a4d3b656",
+    "semantic_hash": "20f9ca087eaf5c7541000476a4d3b656"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Tools\\DropTable.cs": {
+    "mtime": 1752323108.824861,
+    "ast_hash": "01c495fa728ec5727b57d89d2c4930ba",
+    "semantic_hash": "01c495fa728ec5727b57d89d2c4930ba"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Tools\\InsertData.cs": {
+    "mtime": 1752323108.8258553,
+    "ast_hash": "745cf8967c77cb8f54418e5a5b623b35",
+    "semantic_hash": "745cf8967c77cb8f54418e5a5b623b35"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Tools\\ListTables.cs": {
+    "mtime": 1752323108.826858,
+    "ast_hash": "79c3972e7d0508fb9712f067b314110f",
+    "semantic_hash": "79c3972e7d0508fb9712f067b314110f"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Tools\\ReadData.cs": {
+    "mtime": 1752323108.826858,
+    "ast_hash": "a202e56375c4d8c6a9bec30f4714202d",
+    "semantic_hash": "a202e56375c4d8c6a9bec30f4714202d"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Tools\\Tools.cs": {
+    "mtime": 1752323108.827861,
+    "ast_hash": "47541b160f968e3d01409b0ff28f98da",
+    "semantic_hash": "47541b160f968e3d01409b0ff28f98da"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\Tools\\UpdateData.cs": {
+    "mtime": 1752323108.8288655,
+    "ast_hash": "1703f212fa7d1404a9abfcac824002dc",
+    "semantic_hash": "1703f212fa7d1404a9abfcac824002dc"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\obj\\Debug\\net8.0\\MssqlMcp.GlobalUsings.g.cs": {
+    "mtime": 1768574094.5704842,
+    "ast_hash": "9706b2dbf69f7db452e8b0d5baf54dcf",
+    "semantic_hash": "9706b2dbf69f7db452e8b0d5baf54dcf"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\obj\\MssqlMcp.csproj.nuget.dgspec.json": {
+    "mtime": 1771513913.0441213,
+    "ast_hash": "a8d6e7587d66d981728bd32d8e50506d",
+    "semantic_hash": "a8d6e7587d66d981728bd32d8e50506d"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\MssqlMcp\\obj\\project.assets.json": {
+    "mtime": 1771513913.0234017,
+    "ast_hash": "b7bc26639fd682d00facf4c18e6aeb02",
+    "semantic_hash": "b7bc26639fd682d00facf4c18e6aeb02"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\copilot-instructions.md": {
+    "mtime": 1752323108.6746042,
+    "ast_hash": "3e81f41026dcc483de0d6e1a6ea3a1f9",
+    "semantic_hash": "3e81f41026dcc483de0d6e1a6ea3a1f9"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\.github\\tsql\\tsql-best-practices.md": {
+    "mtime": 1752323108.6866133,
+    "ast_hash": "7312bc527ec93e4403cd93e5c40cb84b",
+    "semantic_hash": "7312bc527ec93e4403cd93e5c40cb84b"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\ConfMSmini\\business-process-description.md": {
+    "mtime": 1752323108.6876125,
+    "ast_hash": "26a14cff8c1f521916e7b448bb788bfa",
+    "semantic_hash": "26a14cff8c1f521916e7b448bb788bfa"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\README.md": {
+    "mtime": 1752323108.6886137,
+    "ast_hash": "8c064a9f4c068e70a6f8bd74813f59a1",
+    "semantic_hash": "8c064a9f4c068e70a6f8bd74813f59a1"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AgentMode\\empty-business-process-description.md": {
+    "mtime": 1752323108.689619,
+    "ast_hash": "575ab6b0a6a59baa75efe5b116582c0f",
+    "semantic_hash": "575ab6b0a6a59baa75efe5b116582c0f"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLACSSamples\\src\\requirements.txt": {
+    "mtime": 1752323108.695169,
+    "ast_hash": "88be93cde5eca339136d883c2431402b",
+    "semantic_hash": "88be93cde5eca339136d883c2431402b"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\LangChain\\README.md": {
+    "mtime": 1752323108.7011335,
+    "ast_hash": "a682e95861ac3bfe9ffb894524b76719",
+    "semantic_hash": "a682e95861ac3bfe9ffb894524b76719"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\LangChain\\odbcDriverInstallUbuntu.txt": {
+    "mtime": 1752323108.7061355,
+    "ast_hash": "e22affb029b36866411a61e9cd430d62",
+    "semantic_hash": "e22affb029b36866411a61e9cd430d62"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\LangChain\\requirements.txt": {
+    "mtime": 1752323108.7081337,
+    "ast_hash": "2c615a2bd233aa8f9f43b39591c20a7c",
+    "semantic_hash": "2c615a2bd233aa8f9f43b39591c20a7c"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\env.txt": {
+    "mtime": 1752323108.723133,
+    "ast_hash": "7240a92f89826c817186cc9a4f64f959",
+    "semantic_hash": "7240a92f89826c817186cc9a4f64f959"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\readme.md": {
+    "mtime": 1752323108.7241333,
+    "ast_hash": "ed3c7ca437d78cf08b0115774f63461d",
+    "semantic_hash": "ed3c7ca437d78cf08b0115774f63461d"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Vanna.ai\\odbcDriverInstallUbuntu.txt": {
+    "mtime": 1752323108.736133,
+    "ast_hash": "e22affb029b36866411a61e9cd430d62",
+    "semantic_hash": "e22affb029b36866411a61e9cd430d62"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\README.md": {
+    "mtime": 1752323108.7401338,
+    "ast_hash": "64db524d91b993b2b61710d2af78a94b",
+    "semantic_hash": "64db524d91b993b2b61710d2af78a94b"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\requirements.txt": {
+    "mtime": 1752323108.7411344,
+    "ast_hash": "d230781ba19a82648444c5a07ab86441",
+    "semantic_hash": "d230781ba19a82648444c5a07ab86441"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\data\\eval_sample.html": {
+    "mtime": 1752323108.7511392,
+    "ast_hash": "33abb730cead22eb24d06df640a15626",
+    "semantic_hash": "33abb730cead22eb24d06df640a15626"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\deployment\\deployment_base.yaml": {
+    "mtime": 1752323108.7551396,
+    "ast_hash": "b1d0e5739ceebb79266e050c161250ae",
+    "semantic_hash": "b1d0e5739ceebb79266e050c161250ae"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\deployment\\endpoint_base.yaml": {
+    "mtime": 1752323108.7551396,
+    "ast_hash": "866092f4e6558c420f75c67b1056fbd9",
+    "semantic_hash": "866092f4e6558c420f75c67b1056fbd9"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\deployment\\model_base.yaml": {
+    "mtime": 1752323108.7561388,
+    "ast_hash": "8695f1528f1756c74436c531ff91718e",
+    "semantic_hash": "8695f1528f1756c74436c531ff91718e"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\evaluation\\flow.dag.sample.yaml": {
+    "mtime": 1752323108.7626545,
+    "ast_hash": "6d70a78bb107d10aacba2a052e446a17",
+    "semantic_hash": "6d70a78bb107d10aacba2a052e446a17"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\evaluation\\requirements.txt": {
+    "mtime": 1752323108.764653,
+    "ast_hash": "caa812b3ae9f607dda2b0ab2e3adc2f5",
+    "semantic_hash": "caa812b3ae9f607dda2b0ab2e3adc2f5"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\flow.dag.sample.yaml": {
+    "mtime": 1752323108.778666,
+    "ast_hash": "66846e3dbf5ce4798b56c8bd4520ed75",
+    "semantic_hash": "66846e3dbf5ce4798b56c8bd4520ed75"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow\\requirements.txt": {
+    "mtime": 1752323108.7806673,
+    "ast_hash": "caa812b3ae9f607dda2b0ab2e3adc2f5",
+    "semantic_hash": "caa812b3ae9f607dda2b0ab2e3adc2f5"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow_v2\\flow.dag.sample.yaml": {
+    "mtime": 1752323108.7876666,
+    "ast_hash": "d7589e794d398c0cf1e985c3216f9cf9",
+    "semantic_hash": "d7589e794d398c0cf1e985c3216f9cf9"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLPromptFlowSamples\\src\\sql-promptflow-demo\\promptflow_v2\\requirements.txt": {
+    "mtime": 1752323108.7921822,
+    "ast_hash": "caa812b3ae9f607dda2b0ab2e3adc2f5",
+    "semantic_hash": "caa812b3ae9f607dda2b0ab2e3adc2f5"
+  },
+  "C:\\Repos\\SQL-AI-samples\\CODE_OF_CONDUCT.md": {
+    "mtime": 1752323108.7951808,
+    "ast_hash": "c06b12caf3c901eb3156e3dd5b0aea56",
+    "semantic_hash": "c06b12caf3c901eb3156e3dd5b0aea56"
+  },
+  "C:\\Repos\\SQL-AI-samples\\CONTRIBUTING.md": {
+    "mtime": 1752323108.7963445,
+    "ast_hash": "17874c11a028edebdc48e765ba0837bb",
+    "semantic_hash": "17874c11a028edebdc48e765ba0837bb"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\README.md": {
+    "mtime": 1774025142.0635512,
+    "ast_hash": "18b05ddaa6503e8ac83862f589f75c31",
+    "semantic_hash": "18b05ddaa6503e8ac83862f589f75c31"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\prompts\\README.md": {
+    "mtime": 1774024327.29488,
+    "ast_hash": "4109f599ab4c66d3576775b1e223f731",
+    "semantic_hash": "4109f599ab4c66d3576775b1e223f731"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\prompts\\example-prompt-database-schema.md": {
+    "mtime": 1774024327.297883,
+    "ast_hash": "23d9027b7ed70a8e9f1c70b98e6b8487",
+    "semantic_hash": "23d9027b7ed70a8e9f1c70b98e6b8487"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\prompts\\prompt-ticket.md": {
+    "mtime": 1774024327.2998822,
+    "ast_hash": "03aa06cb6cb88db947345bdd58db6f5f",
+    "semantic_hash": "03aa06cb6cb88db947345bdd58db6f5f"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\.github\\copilot-instructions.md": {
+    "mtime": 1752323108.8153584,
+    "ast_hash": "e62b5972d19bbcbb83d6a365068adc06",
+    "semantic_hash": "e62b5972d19bbcbb83d6a365068adc06"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\dotnet\\README.md": {
+    "mtime": 1768575083.5495298,
+    "ast_hash": "0dfff61d027e2b73464ce62da473f63b",
+    "semantic_hash": "0dfff61d027e2b73464ce62da473f63b"
+  },
+  "C:\\Repos\\SQL-AI-samples\\README.md": {
+    "mtime": 1752323108.8298557,
+    "ast_hash": "ff1843b094112a7a95e5a113722a56cd",
+    "semantic_hash": "ff1843b094112a7a95e5a113722a56cd"
+  },
+  "C:\\Repos\\SQL-AI-samples\\SECURITY.md": {
+    "mtime": 1752323108.8298557,
+    "ast_hash": "57f14126c1c6add76b3aef3844dfe4e3",
+    "semantic_hash": "57f14126c1c6add76b3aef3844dfe4e3"
+  },
+  "C:\\Repos\\SQL-AI-samples\\SUPPORT.md": {
+    "mtime": 1752323108.8308558,
+    "ast_hash": "7bd61963507e06f2bf501bf63facb9ec",
+    "semantic_hash": "7bd61963507e06f2bf501bf63facb9ec"
+  },
+  "C:\\Repos\\SQL-AI-samples\\AzureSQLDatabase\\Prompt-Based T-SQL Database Development\\End to End SQL Database Development - A Comprehensive guide with Interactive Prompts.pdf": {
+    "mtime": 1752323108.714133,
+    "ast_hash": "dbbd2aea00998c876ce0304e27af1272",
+    "semantic_hash": "dbbd2aea00998c876ce0304e27af1272"
+  },
+  "C:\\Repos\\SQL-AI-samples\\MssqlMcp\\Node\\src\\img\\logo.png": {
+    "mtime": 1752323108.8043628,
+    "ast_hash": "30c723c35357d681d388e9ab53579012",
+    "semantic_hash": "30c723c35357d681d388e9ab53579012"
+  }
+}

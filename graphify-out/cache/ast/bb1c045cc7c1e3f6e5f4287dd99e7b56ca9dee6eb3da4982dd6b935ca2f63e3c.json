@@ -1,0 +1,1 @@
+{"nodes": [{"id": "c_repos_sql_ai_samples_agentmode_github_tsql_inner_loop_build_ps1", "label": "Build.ps1", "file_type": "code", "source_file": "AgentMode/.github/tsql/inner-loop/Build.ps1", "source_location": "L1"}], "edges": [], "raw_calls": []}

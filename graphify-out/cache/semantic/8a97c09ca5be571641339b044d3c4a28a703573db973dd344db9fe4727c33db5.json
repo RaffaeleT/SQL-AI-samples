@@ -1,0 +1,1 @@
+{"nodes": [{"id": "contentsafety_analyzetext", "label": "analyzeText Stored Procedure", "file_type": "code", "source_file": "AzureSQLDatabase/ContentModeration/contentSafety.sql", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
